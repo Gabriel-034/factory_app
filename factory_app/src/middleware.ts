@@ -14,8 +14,14 @@ export async function middleware(req: NextRequest) {
 
     console.log(session);
 
-    if (!session) {
-        return NextResponse.rewrite(new URL('/login', req.url))
+    const publicRoutes = ["/login", "/signup"]; // Add more public routes here
+
+    // Check if the current route is a public route
+    const isPublicRoute = publicRoutes.includes(req.nextUrl.pathname);
+  
+    // If there's no session and the current route is not a public route, redirect to signup
+    if (!session && !isPublicRoute) {
+      return NextResponse.rewrite(new URL("/login", req.url));
     }
 
     return res

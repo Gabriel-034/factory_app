@@ -9,22 +9,21 @@ export default function Login() {
     const [data, setData] = useState<{
         email: string,
         password: string
-        }>({
-            email: '',
-            password: ''
-            })
-            
+    }>({
+        email: '',
+        password: ''
+    })
+    
     const router = useRouter();
 
     const login = async () => {
         try {                   
-
-            let { data: dataUser, error } = await supabase.auth.signInWithPassword({
+            let { data: dataUser, error } = await supabase.auth.signUp({
                 email: data.email,
                 password: data.password
               })
-  
-            if (dataUser) {
+
+            if (data) {
                 router.refresh();
             } //redirect une fois connecté faire log in et faire une signup road pcq pr l'instant c en signup mais ca doit aller en log in une fois sign up sur auth supabase
 
@@ -41,8 +40,7 @@ export default function Login() {
         }));
     }
 
-    return <div className="relative min-h-screen">
-    <div className="container mx-auto w-[400px] grid gap-4">
+    return <div className="container mx-auto w-[400px] grid gap-4">
         <div className='grid'>
             <label>Email</label>
             <input
@@ -65,14 +63,7 @@ export default function Login() {
         </div>
         <div>
             <button className="px-4 py-2 bg-blue-500 rounded cursor-pointer" onClick={login}
-                >Login</button>
+                >Sign up</button>
         </div>
-        <div className="w-full text-center mt-8">
-            Don't have an account? 
-            <Link href="/signup">
-                <div className="text-blue-500 hover:underline">Sign up here</div>
-            </Link>
-        </div>
-    </div>
     </div>;
 }
