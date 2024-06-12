@@ -46,7 +46,7 @@ export default function Login() {
         if (notification) {
             const timer = setTimeout(() => {
                 setNotification(null);
-            }, 8000);
+            }, 5000);
 
             return () => clearTimeout(timer);
         }
