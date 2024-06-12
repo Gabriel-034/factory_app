@@ -27,7 +27,6 @@ export default function Login() {
 
             if (dataUser) {
                 setNotification("A confirmation email has been sent, please validate your Email");
-                router.push('/login');
             } //redirect une fois connecté faire log in et faire une signup road pcq pr l'instant c en signup mais ca doit aller en log in une fois sign up sur auth supabase
 
         } catch(error) {
@@ -47,7 +46,7 @@ export default function Login() {
         if (notification) {
             const timer = setTimeout(() => {
                 setNotification(null);
-            }, 3000);
+            }, 8000);
 
             return () => clearTimeout(timer);
         }
@@ -78,6 +77,19 @@ export default function Login() {
             <button className="px-4 py-2 bg-blue-500 rounded cursor-pointer" onClick={login}
                 >Sign up</button>
         </div>
-        {notification && <div className="notification">{notification}</div>}
+        {notification && (
+          <div style={{
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            padding: '20px',
+            backgroundColor: '#444',
+            color: '#fff',
+            borderRadius: '5px',
+            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.3)'
+          }}>
+            {notification}
+          </div>
+        )}
     </div>;
 }
