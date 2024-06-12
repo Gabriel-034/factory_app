@@ -23,8 +23,8 @@ export default function Login() {
                 password: data.password
               })
 
-            if (data) {
-                router.refresh();
+            if (dataUser) {
+                router.push('/login');
             } //redirect une fois connecté faire log in et faire une signup road pcq pr l'instant c en signup mais ca doit aller en log in une fois sign up sur auth supabase
 
         } catch(error) {
