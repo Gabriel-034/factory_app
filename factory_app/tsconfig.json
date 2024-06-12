@@ -21,6 +21,9 @@
       "@/*": ["./src/*"]
     }
   },
+  "rules": {
+    "react/no-unescaped-entities": "off"
+  },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/login.tsx", "oldlogin.tsx", "oldSignup.tsx"],
   "exclude": ["node_modules"]
 }
