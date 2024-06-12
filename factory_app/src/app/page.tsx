@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <>
-  <div>you are Log in</div>
+  <div>you are Logged in</div>
   <div>
     <div className="text-blue-500 hover:underline"onClick={handleSignOut}>Log out</div>
   </div>
