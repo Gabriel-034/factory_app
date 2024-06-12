@@ -1,7 +1,7 @@
 'use client';
 
 import { supabase } from "@/lib/supabase";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
 
@@ -13,7 +13,9 @@ export default function Login() {
         email: '',
         password: ''
     })
-    
+
+    const [notification, setNotification] = useState<string | null>(null);
+
     const router = useRouter();
 
     const login = async () => {
@@ -24,6 +26,7 @@ export default function Login() {
               })
 
             if (dataUser) {
+                setNotification("A confirmation email has been sent, please validate your Email");
                 router.push('/login');
             } //redirect une fois connecté faire log in et faire une signup road pcq pr l'instant c en signup mais ca doit aller en log in une fois sign up sur auth supabase
 
@@ -39,6 +42,16 @@ export default function Login() {
             [name]: value,
         }));
     }
+
+    useEffect(() => {
+        if (notification) {
+            const timer = setTimeout(() => {
+                setNotification(null);
+            }, 3000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [notification]);
 
     return <div className="container mx-auto w-[400px] grid gap-4">
         <div className='grid'>
@@ -65,5 +78,6 @@ export default function Login() {
             <button className="px-4 py-2 bg-blue-500 rounded cursor-pointer" onClick={login}
                 >Sign up</button>
         </div>
+        {notification && <div className="notification">{notification}</div>}
     </div>;
 }
